@@ -21,7 +21,14 @@ type floatResult struct {
 }
 
 func infoHandler(w http.ResponseWriter, r *http.Request) {
-    response := map[string]string{"info": "This is a simple math API"}
+    response := map[string]string{"info": "Endpoints map",
+	"/info": "Информация об API",
+	"/first":"Первое случайное число",
+	"/second":"Второе случайное число",
+	"/add":"Сумма двух случайных чисел",
+	"/sub":"Разность двух случайных чисел",
+	"/mul":"Произведение двух случайных чисел",
+	"/div":"Деление двух случайных чисел"}
     w.Header().Set("Content-Type", "application/json")
     json.NewEncoder(w).Encode(response)
 }
