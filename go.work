@@ -1,3 +1,7 @@
 go 1.23.0
 
-use ./hello
+use (
+	./hello
+	./homework/day1/calc
+	./jsonFiles
+)
