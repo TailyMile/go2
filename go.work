@@ -1,7 +1,9 @@
 go 1.23.0
 
 use (
+	./TrashAPI-GorillaMux
 	./hello
 	./homework/day1/calc
+	./homework/day2/TaskAPIGorillaMux
 	./jsonFiles
 )

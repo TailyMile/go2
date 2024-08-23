@@ -1,0 +1,84 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "TaskStore",
+    "dateExported": "2023-10-31T11:36:58.766Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "488685fd-4a7a-4c76-86f5-5b711832722a",
+            "colId": "cb47df96-a509-46ae-9d79-706c22df98ee",
+            "containerId": "",
+            "name": "Get All Tasks",
+            "url": "{{host}}{{port}}/task/",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-10-31T09:52:55.359Z",
+            "modified": "2023-10-31T09:53:45.325Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "07f3f8c9-906f-4f9f-b511-dc787091c645",
+            "colId": "cb47df96-a509-46ae-9d79-706c22df98ee",
+            "containerId": "",
+            "name": "Get Task By Id",
+            "url": "{{host}}{{port}}/task/1",
+            "method": "GET",
+            "sortNum": 15000,
+            "created": "2023-10-31T10:06:08.532Z",
+            "modified": "2023-10-31T11:36:10.590Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "5ae884a4-ed00-472d-a837-efeac15ea17d",
+            "colId": "cb47df96-a509-46ae-9d79-706c22df98ee",
+            "containerId": "",
+            "name": "Post New Task",
+            "url": "{{host}}{{port}}/task/",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-10-31T09:53:57.500Z",
+            "modified": "2023-10-31T10:22:34.050Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"text\": \"first task\",\n  \"tags\": [\n    \"go rest api\"\n    ],\n  \"due\": \"2023-10-31T12:58:05Z\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "1f22d017-8220-43ff-ae55-758a161987d1",
+            "colId": "cb47df96-a509-46ae-9d79-706c22df98ee",
+            "containerId": "",
+            "name": "Delete All Tasks",
+            "url": "{{host}}{{port}}/task/",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2023-10-31T10:04:36.422Z",
+            "modified": "2023-10-31T10:05:23.284Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "1d172fa9-d3fc-4591-b5fc-76f8a48e4de9",
+            "colId": "cb47df96-a509-46ae-9d79-706c22df98ee",
+            "containerId": "",
+            "name": "Delete Task By Id",
+            "url": "{{host}}{{port}}/task/1",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2023-10-31T10:06:41.236Z",
+            "modified": "2023-10-31T11:36:27.957Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}
