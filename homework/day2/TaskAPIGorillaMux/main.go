@@ -23,7 +23,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/vadshi/go2/TaskStoreAPI/internal/taskstore"
+	"github.com/vadshi/go2/homework/day2/TaskAPIGorillaMux/internal/taskstore"
 )
 
 type taskServer struct {
@@ -227,6 +227,8 @@ func main() {
 	// mux := http.NewServeMux()
 	r := mux.NewRouter()
 	server := NewTaskServer()
+
+	println("Server is RUNNING. Enjoy")
 
 	// Added routing for "/task/" URL
 	r.HandleFunc("/task/", server.taskHandler).Methods("GET", "POST", "DELETE")
