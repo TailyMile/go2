@@ -19,19 +19,18 @@ import (
 	"log"
 	"mime"
 	"net/http"
-	"os"
 	"strconv"
 	"time"
 
-	"github.com/TailyMile/go2/TaskAPIGurillaMux/internal/taskstore"
 	"github.com/gorilla/mux"
+	"github.com/vadshi/go2/TaskStoreAPI/internal/taskstore"
 )
 
 type taskServer struct {
 	store *taskstore.TaskStore
 }
 
-func NewTaskServer(store *taskstore.TaskStore) *taskServer {
+func NewTaskServer() *taskServer {
 	store := taskstore.New()
 	return &taskServer{store: store}
 }
@@ -225,13 +224,6 @@ func (ts *taskServer) getTaskByDateHandler(w http.ResponseWriter, r *http.Reques
 }
 
 func main() {
-	os.Remove("./tasks.db")
-
-	dbPath := "./tasks.db"
-	store, err := taskstore.New(dbPath)
-	if err != nil {
-		log.Fatal(err)
-	}
 	// mux := http.NewServeMux()
 	r := mux.NewRouter()
 	server := NewTaskServer()
