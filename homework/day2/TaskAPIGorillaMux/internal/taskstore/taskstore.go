@@ -4,21 +4,20 @@ import (
 	"fmt"
 	"sync"
 	"time"
-
 )
 
 type Task struct {
-	Id	int `json:"id"`
-	Text string `json:"text"`
-	Tags []string `json:"tags"`
-	Due time.Time `json:"due"`
+	Id   int       `json:"id"`
+	Text string    `json:"text"`
+	Tags []string  `json:"tags"`
+	Due  time.Time `json:"due"`
 }
 
 // TaskStore is a simple in-memory database of tasks;
 type TaskStore struct {
 	sync.Mutex
 
-	tasks map[int]Task
+	tasks  map[int]Task
 	nextId int
 }
 
@@ -36,9 +35,9 @@ func (ts *TaskStore) CreateTask(text string, tags []string, due time.Time) int {
 	defer ts.Unlock()
 
 	task := Task{
-		Id: ts.nextId,
+		Id:   ts.nextId,
 		Text: text,
-		Due: due}
+		Due:  due}
 	task.Tags = make([]string, len(tags))
 	copy(task.Tags, tags)
 	// Сохранили task в TaskStore
@@ -46,7 +45,6 @@ func (ts *TaskStore) CreateTask(text string, tags []string, due time.Time) int {
 	ts.nextId++
 	return task.Id
 }
-
 
 // GetTask retrieves the task from taskstore by given id
 func (ts *TaskStore) GetTask(id int) (Task, error) {
@@ -68,7 +66,7 @@ func (ts *TaskStore) GetAllTasks() []Task {
 	defer ts.Unlock()
 
 	allTasks := make([]Task, 0, len(ts.tasks))
-	for _, task := range ts.tasks{
+	for _, task := range ts.tasks {
 		allTasks = append(allTasks, task)
 	}
 
@@ -86,8 +84,8 @@ func (ts *TaskStore) GetTaskbyTag(tag string) ([]Task, error) {
 		for _, t := range task.Tags {
 			if t == tag {
 				allTasksWithTag = append(allTasksWithTag, task)
-			} 
-	if len(allTasksWithTag) == 0 {
+			}
+			if len(allTasksWithTag) == 0 {
 				return nil, fmt.Errorf("tasks with tag=%s not found", tag)
 			}
 		}
@@ -95,6 +93,24 @@ func (ts *TaskStore) GetTaskbyTag(tag string) ([]Task, error) {
 	return allTasksWithTag, nil
 }
 
+// Возвращаем таски с заданной датой (без учета времени)
+func (ts *TaskStore) GetTaskByDate(date time.Time) ([]Task, error) {
+	ts.Lock()
+	defer ts.Unlock()
+
+	var tasksOnDate []Task
+	for _, task := range ts.tasks {
+		if task.Due.Year() == date.Year() && task.Due.Month() == date.Month() && task.Due.Day() == date.Day() {
+			tasksOnDate = append(tasksOnDate, task)
+		}
+	}
+
+	if len(tasksOnDate) == 0 {
+		return nil, fmt.Errorf("tasks on date=%v not found", date.Format("2006/01/02"))
+	}
+
+	return tasksOnDate, nil
+}
 
 // DeleteAllTasks deletes all tasks in the taskstore
 func (ts *TaskStore) DeleteAllTasks() error {
